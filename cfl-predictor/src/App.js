@@ -1,25 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="Title">
+        <h1>CFL Season Predictor</h1>
       </header>
+      <header className="NavBar">
+        <NavigationBar />
+      </header>
+      <section className="Content">
+        <ContentPage />
+      </section>
     </div>
   );
+}
+
+function ContentPage() {
+  return (
+    <p>
+      This is a Content Pane. Its form and function will change according to what button is clicked in the Navigation Bar.
+    </p>
+  );
+}
+
+function NavigationBar() {
+  return(
+    <button>Season Standings</button>
+  );  
 }
 
 export default App;
