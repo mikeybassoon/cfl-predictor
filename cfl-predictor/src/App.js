@@ -1,6 +1,7 @@
 import './App.css';
 
 function App() {
+  let contentType = "season-standings";
   return (
     <div className="App">
       <header className="Title">
@@ -10,24 +11,43 @@ function App() {
         <NavigationBar />
       </header>
       <section className="Content">
-        <ContentPage />
+        <ContentPage 
+          type={contentType}
+        />
       </section>
     </div>
   );
 }
 
-function ContentPage() {
-  return (
+function NavigationBar() {
+  return(
+    <div className="ButtonStrip">
+      <button>Season Standings</button>
+      <button>Test</button>
+    </div> 
+  );  
+}
+
+function ContentPage(props) {
+  if(props.type == "season-standings") return <ContentSeasonStandings />
+  else if(props.type == "test") return <ContentTestPage />
+  else return <p>Error - invalid page name</p>
+}
+
+function ContentSeasonStandings() {
+  return(
     <p>
-      This is a Content Pane. Its form and function will change according to what button is clicked in the Navigation Bar.
+      This is the content pane for Season Standings.
     </p>
   );
 }
 
-function NavigationBar() {
+function ContentTestPage() {
   return(
-    <button>Season Standings</button>
-  );  
+    <p>
+      This is the test page!
+    </p>
+  );
 }
 
 export default App;
