@@ -1,7 +1,8 @@
 import './App.css';
+import {useState} from 'react';
+
 
 function App() {
-  let contentType = "season-standings";
   return (
     <div className="App">
       <header className="Title">
@@ -11,9 +12,7 @@ function App() {
         <NavigationBar />
       </header>
       <section className="Content">
-        <ContentPage 
-          type={contentType}
-        />
+        <ContentPage />
       </section>
     </div>
   );
@@ -28,9 +27,10 @@ function NavigationBar() {
   );  
 }
 
-function ContentPage(props) {
-  if(props.type == "season-standings") return <ContentSeasonStandings />
-  else if(props.type == "test") return <ContentTestPage />
+function ContentPage() {
+  const [displayPage, setDisplayPage] = useState("season-standings"); // State to control which page of app is displayed
+  if(displayPage == "season-standings") return <ContentSeasonStandings />
+  else if(displayPage == "test") return <ContentTestPage />
   else return <p>Error - invalid page name</p>
 }
 
