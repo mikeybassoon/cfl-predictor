@@ -1,4 +1,6 @@
 import './App.css';
+import {useState} from 'react';
+
 
 function App() {
   return (
@@ -16,18 +18,36 @@ function App() {
   );
 }
 
+function NavigationBar() {
+  return(
+    <div className="ButtonStrip">
+      <button>Season Standings</button>
+      <button>Test</button>
+    </div> 
+  );  
+}
+
 function ContentPage() {
-  return (
+  const [displayPage, setDisplayPage] = useState("season-standings"); // State to control which page of app is displayed
+  if(displayPage == "season-standings") return <ContentSeasonStandings />
+  else if(displayPage == "test") return <ContentTestPage />
+  else return <p>Error - invalid page name</p>
+}
+
+function ContentSeasonStandings() {
+  return(
     <p>
-      This is a Content Pane. Its form and function will change according to what button is clicked in the Navigation Bar.
+      This is the content pane for Season Standings.
     </p>
   );
 }
 
-function NavigationBar() {
+function ContentTestPage() {
   return(
-    <button>Season Standings</button>
-  );  
+    <p>
+      This is the test page!
+    </p>
+  );
 }
 
 export default App;
