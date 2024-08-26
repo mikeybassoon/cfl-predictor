@@ -6,6 +6,7 @@ import {ApiEngine} from './ApiEngine.js';
 
 
 function App() {
+  const apiEngine = new ApiEngine();
   return (
     <div className="App">
       <header className="Title">
@@ -15,7 +16,9 @@ function App() {
         <NavigationBar />
       </header>
       <section className="Content">
-        <ContentPage />
+        <ContentPage 
+          apiEngine={apiEngine}
+        />
       </section>
     </div>
   );
@@ -30,18 +33,28 @@ function NavigationBar() {
   );  
 }
 
-function ContentPage() {
+function ContentPage(props) {
   const [displayPage, setDisplayPage] = useState("season-standings"); // State to control which page of app is displayed
-  if(displayPage == "season-standings") return <ContentSeasonStandings />
-  else if(displayPage == "test") return <ContentTestPage />
+  if(displayPage === "season-standings") {
+    return <ContentSeasonStandings 
+      apiEngine={props.apiEngine}
+    />
+  }
+  else if(displayPage === "test") return <ContentTestPage />
   else return <p>Error - invalid page name</p>
 }
 
-function ContentSeasonStandings() {
+function ContentSeasonStandings(props) {
+  const data = props.apiEngine.GetSeasonStandings(new Date().getFullYear);
   return(
-    <p>
+    <div>
+      <p>
       This is the content pane for Season Standings.
     </p>
+    <p>
+      {data.toString}
+    </p>
+    </div>
   );
 }
 

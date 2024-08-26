@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-class ApiEngine {
+export class ApiEngine {
     constructor (){
         this.previousRequestTime = new Date();
+        this.urlBase = "http://api.cfl.ca";
     }
 
     DataFetcher = function(endpointUrl) {
@@ -27,9 +28,15 @@ class ApiEngine {
     }
 
     ExecuteApiCall = function(endpointUrl) {
-        while (RequestMustWait){
-            Sleep(1000).then(() => { !RequestMustWait && DataFetcher.fetchData(endpointUrl) });
+        while (this.RequestMustWait){
+            this.Sleep(1000).then(() => { !this.RequestMustWait && this.DataFetcher.fetchData(endpointUrl) });
         }
+    }
+
+    GetSeasonStandings = function(year){
+        const key = ''; // this should contain the API key once I get it working
+        const url = this.urlBase + '/v1/standings/' + year + key;
+        return this.ExecuteApiCall(url);
     }
 
     RequestMustWait = function() {
@@ -43,4 +50,3 @@ class ApiEngine {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 };
-
