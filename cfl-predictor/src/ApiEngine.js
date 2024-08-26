@@ -1,52 +1,50 @@
 import { useEffect, useState } from 'react';
+import Sleep from './Functions.js';
 
-export class ApiEngine {
-    constructor (){
-        this.previousRequestTime = new Date();
-        this.urlBase = "http://api.cfl.ca";
-    }
+const urlBase = "http://api.cfl.ca";
 
-    DataFetcher = function(endpointUrl) {
-        const [data, setData] = useState([]);
-        const [loading, setLoading] = useState(true);
-        const [error, setError] = useState(null);
-    
-        const fetchData = async() => {
-            try{
-                const response = await fetch(endpointUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok.');
-                }
-                const data = await response.json();
-                setData(data);
-                setLoading(false);
-            } catch (error) {
-                setError(error.message);
-                setLoading(false);
+ApiEngine = function(props) {
+    //
+}
+
+DataFetcher = function(endpointUrl) {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    FetchData = async() => {
+        try{
+            const response = await fetch(endpointUrl);
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
             }
-        };
-    }
-
-    ExecuteApiCall = function(endpointUrl) {
-        while (this.RequestMustWait){
-            this.Sleep(1000).then(() => { !this.RequestMustWait && this.DataFetcher.fetchData(endpointUrl) });
+            const data = await response.json();
+            setData(data);
+            setLoading(false);
+        } catch (error) {
+            setError(error.message);
+            setLoading(false);
         }
-    }
+    };
+}
 
-    GetSeasonStandings = function(year){
-        const key = ''; // this should contain the API key once I get it working
-        const url = this.urlBase + '/v1/standings/' + year + key;
-        return this.ExecuteApiCall(url);
+ExecuteApiCall = function(endpointUrl) {
+    while (RequestMustWait){
+        Sleep(1000).then(() => { !RequestMustWait && DataFetcher(endpointUrl) });
     }
+}
 
-    RequestMustWait = function() {
-        const currentTime = new Date();
-        if (currentTime - this.previousRequestTime > 2000)
-            return false;
-        return true;
-    }
+RequestMustWait = function(previousRequestTime) {
+    const currentTime = new Date();
+    if (currentTime - previousRequestTime > 2000)
+        return false;
+    return true;
+} 
 
-    Sleep = function(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-};
+// specific API calls
+
+GetSeasonStandings = function(year){
+    const key = ''; // this should contain the API key once I get it working
+    const url = urlBase + '/v1/standings/' + year + key;
+    return ExecuteApiCall(url);
+} 

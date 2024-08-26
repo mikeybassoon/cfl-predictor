@@ -6,9 +6,13 @@ import {ApiEngine} from './ApiEngine.js';
 
 
 function App() {
-  const apiEngine = new ApiEngine();
   return (
     <div className="App">
+      <div className="Logic">
+        <ApiEngine
+          previousRequestTime={new Date()}
+        />
+      </div>
       <header className="Title">
         <h1>CFL Season Predictor</h1>
       </header>
