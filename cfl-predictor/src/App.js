@@ -20,7 +20,9 @@ function ContentWindow() {
   return (
     <div>
       <header className="NavBar">
-        <NavigationBar />
+        <NavigationBar 
+          setDisplayPage = {setDisplayPage}
+        />
       </header>
       <section className="ContentPane">
         <ContentPage 
@@ -31,13 +33,34 @@ function ContentWindow() {
   );
 }
 
-function NavigationBar() {
+function NavigationBar(props) {
   return(
     <div className="ButtonStrip">
-      <button>Season Standings</button>
-      <button>Test</button>
+      <NavButton 
+        text='Season Standings'
+        setDisplayPage = {props.setDisplayPage}
+        pageName='season-standings'
+      />
+      <NavButton
+        text='Testing'
+        setDisplayPage = {props.setDisplayPage}
+        pageName='test'
+      />
     </div> 
   );  
+}
+
+function NavButton(props) {
+  function handleClick(){
+    props.setDisplayPage(props.pageName);
+  }
+  return(
+    <button
+      onClick={handleClick}
+    >
+      {props.text}
+    </button>
+  );
 }
 
 function ContentPage(props) {
@@ -60,9 +83,11 @@ function ContentSeasonStandings() {
 
 function ContentTestPage() {
   return(
-    <p>
-      This is the test page!
-    </p>
+    <div>
+      <p>
+        This is the test page!
+      </p>
+    </div>   
   );
 }
 
