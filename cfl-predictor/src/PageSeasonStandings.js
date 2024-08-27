@@ -10,6 +10,22 @@ function ContentSeasonStandings() {
   );
 }
 
+function CrossoverRankingTable() {
+  return(
+    <div>
+      <h2>Season Rankings - Crossover</h2>
+    </div>
+  );
+}
+
+function RegularRankingTable() {
+  return(
+    <div>
+      <h2>Season Rankings - Regular</h2>
+    </div>
+  );
+}
+
 function SeasonStandingsNavBar(props) {
   return(
     <div className="ButtonStrip">
@@ -39,9 +55,8 @@ function SeasonStandingsNavButton(props) {
 }
 
 function SeasonTable(props) {
-  if(props.displayPage === 'pageA') return(<p>Page A</p>);
-  else if (props.displayPage === 'pageB') return(<p>Page B</p>);
-  else return(<p>Error</p>);
+  if(props.displayPage === 'pageA') return(<RegularRankingTable />);
+  else if (props.displayPage === 'pageB') return(<CrossoverRankingTable />);
 }
 
 export {
