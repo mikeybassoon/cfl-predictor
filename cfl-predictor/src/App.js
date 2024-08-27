@@ -1,5 +1,8 @@
 import './App.css';
+
 import {useState} from 'react';
+
+import {ContentSeasonStandings} from './PageSeasonStandings';
 
 
 function App() {
@@ -69,16 +72,6 @@ function ContentPage(props) {
   }
   else if(props.pageName === "test") return <ContentTestPage />
   else return <p>Error - invalid page name</p>
-}
-
-function ContentSeasonStandings() {
-  return(
-    <div>
-      <p>
-      This is the content pane for Season Standings.
-      </p>
-    </div>
-  );
 }
 
 function ContentTestPage() {
