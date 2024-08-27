@@ -14,14 +14,87 @@ function CrossoverRankingTable() {
   return(
     <div>
       <h2>Season Rankings - Crossover</h2>
+      <DivisionTable divisionName='West Division' />
+      <DivisionTable divisionName='East Division' />
     </div>
   );
+}
+
+function DivisionTable(props){
+  const rows = []; // placeholder for actual division ranking data
+
+  //TESTING CODE ONLY
+  rows.push(
+    <DivisionTableRow 
+      rank={1}
+      teamName='Saskatchewan Roughriders'
+      games={5}
+      wins={3}
+      losses={1}
+      ties={1}
+    />
+  );
+
+  return(
+    <div>
+      <h3>{props.divisionName}</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th></th> {/* will contain team logo */}
+            <th>Team</th>
+            <th>Games</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Ties</th>
+          </tr>
+        </thead>
+        <tbody>
+          <DivisionTableBody rows={rows} />
+        </tbody>    
+      </table>
+    </div>
+  );
+}
+
+function DivisionTableBody(props) {
+  const rows = props.rows;
+  for(let i=0; i<length; i++){
+    row=rows[i];
+    return(
+      <DivisionTableRow 
+        rank={row.rank}
+        teamName={row.teamName}
+        games={row.games}
+        wins={row.wins}
+        losses={row.losses}
+        ties={row.ties}
+      />
+    )
+  }
+}
+
+function DivisionTableRow(props) {
+  return(
+    <tr>
+      <td>{props.rank}</td>
+      <td></td>
+      <td>{props.teamName}</td>
+      <td>{props.games}</td>
+      <td>{props.wins}</td>
+      <td>{props.losses}</td>
+      <td>{props.ties}</td>
+    </tr>
+  )
 }
 
 function RegularRankingTable() {
   return(
     <div>
       <h2>Season Rankings - Regular</h2>
+      <DivisionTable divisionName='West Division' />
+      <DivisionTable divisionName='East Division' />
     </div>
   );
 }
