@@ -1,29 +1,32 @@
 import './App.css';
-
 import {useState} from 'react';
-
-import {ApiEngine} from './ApiEngine.js';
 
 
 function App() {
   return (
     <div className="App">
-      <div className="Logic">
-        <ApiEngine
-          previousRequestTime={new Date()}
-        />
-      </div>
       <header className="Title">
         <h1>CFL Season Predictor</h1>
       </header>
+      <section>
+        <ContentWindow />
+      </section>
+    </div>
+  );
+}
+
+function ContentWindow() {
+  const [displayPage, setDisplayPage] = useState("season-standings"); // State to control which page of app is displayed
+  return (
+    <div>
       <header className="NavBar">
         <NavigationBar />
       </header>
-      <section className="Content">
+      <section className="ContentPane">
         <ContentPage 
-          apiEngine={apiEngine}
+          pageName={displayPage}
         />
-      </section>
+      </section>  
     </div>
   );
 }
@@ -38,26 +41,19 @@ function NavigationBar() {
 }
 
 function ContentPage(props) {
-  const [displayPage, setDisplayPage] = useState("season-standings"); // State to control which page of app is displayed
-  if(displayPage === "season-standings") {
-    return <ContentSeasonStandings 
-      apiEngine={props.apiEngine}
-    />
+  if(props.pageName === "season-standings") {
+    return <ContentSeasonStandings />
   }
-  else if(displayPage === "test") return <ContentTestPage />
+  else if(props.pageName === "test") return <ContentTestPage />
   else return <p>Error - invalid page name</p>
 }
 
-function ContentSeasonStandings(props) {
-  const data = props.apiEngine.GetSeasonStandings(new Date().getFullYear);
+function ContentSeasonStandings() {
   return(
     <div>
       <p>
       This is the content pane for Season Standings.
-    </p>
-    <p>
-      {data.toString}
-    </p>
+      </p>
     </div>
   );
 }
