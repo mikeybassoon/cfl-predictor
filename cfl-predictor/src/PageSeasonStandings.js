@@ -60,7 +60,7 @@ function DivisionTable(props){
 function DivisionTableBody(props) {
   const rows = props.rows;
   for(let i=0; i<rows.length; i++){
-    const row=rows[i];
+    const row=rows[i].props;
     return(
       <DivisionTableRow 
         rank={row.rank}
