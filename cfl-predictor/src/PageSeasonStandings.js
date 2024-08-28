@@ -42,7 +42,6 @@ function DivisionTable(props){
         <thead>
           <tr>
             <th>Rank</th>
-            <th></th> {/* will contain team logo */}
             <th>Team</th>
             <th>Games</th>
             <th>Wins</th>
@@ -60,8 +59,8 @@ function DivisionTable(props){
 
 function DivisionTableBody(props) {
   const rows = props.rows;
-  for(let i=0; i<length; i++){
-    row=rows[i];
+  for(let i=0; i<rows.length; i++){
+    const row=rows[i].props;
     return(
       <DivisionTableRow 
         rank={row.rank}
@@ -79,7 +78,6 @@ function DivisionTableRow(props) {
   return(
     <tr>
       <td>{props.rank}</td>
-      <td></td>
       <td>{props.teamName}</td>
       <td>{props.games}</td>
       <td>{props.wins}</td>
