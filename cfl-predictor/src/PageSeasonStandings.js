@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {useState} from 'react';
 
 function ContentSeasonStandings() {
@@ -11,6 +12,17 @@ function ContentSeasonStandings() {
 }
 
 function CrossoverRankingTable() {
+  const [data, setData] = useState([]);
+  const url = `http://api.cfl.ca/v1/standings/2024?key=${process.env.REACT_APP_CFL_API_KEY}`;
+
+  console.log(url);
+
+  fetch(url)
+   .then(response => response.json())
+   .then(data => setData = data);
+
+  console.log(data);
+
   return(
     <div>
       <h2>Season Rankings - Crossover</h2>
@@ -22,6 +34,7 @@ function CrossoverRankingTable() {
 
 function DivisionTable(props){
   const rows = []; // placeholder for actual division ranking data
+  
 
   //TESTING CODE ONLY
   rows.push(
@@ -88,6 +101,8 @@ function DivisionTableRow(props) {
 }
 
 function RegularRankingTable() {
+  const [data, setData] = useState([])
+
   return(
     <div>
       <h2>Season Rankings - Regular</h2>
